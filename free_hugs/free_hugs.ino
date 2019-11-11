@@ -122,13 +122,9 @@ void setup() {
   pinMode(DIST_ECHO, INPUT);
   
   // on startup, turn on inflation for 12 seconds
-//  digitalWrite(INFLATION, HIGH);
-//  delay(INITIAL_INFLATE*1000);
-//  digitalWrite(INFLATION, LOW);
-
-  digitalWrite(DEFLATION, HIGH);
-  delay(3000);
-  digitalWrite(DEFLATION, LOW);
+  digitalWrite(INFLATION, HIGH);
+  delay(INITIAL_INFLATE*1000);
+  digitalWrite(INFLATION, LOW);
 
   // Initialize distances with high numbers
   for (int i=0; i<N_READINGS; i++){
