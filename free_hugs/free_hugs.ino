@@ -46,7 +46,7 @@ int DIST_ECHO = 2;
 // https://www.arduino.cc/en/tutorial/smoothing
 // number of readings to average over
 
-const int N_READINGS = 50;
+const int N_READINGS = 10;
 
 // distance threshold to trigger deflation
 int DEFLATION_THRESHOLD = 100;
@@ -145,6 +145,19 @@ void loop() {
 
   // store the current time of the loop
   time_current = millis();
+
+  // account for time resets on the arduino
+  if (time_current < time_last_inflation || 
+      time_current < time_inflation_started ||
+      time_current < time_deflation_started ||
+      time_current < time_refill_delay ||
+      time_current < time_audio_start){
+    time_last_inflation = 0;
+    time_inflation_started = 0;
+    time_deflation_started = 0;
+    time_refill_delay = 0;
+    time_audio_start = 0;
+  }
 
 
   // if the autoinflate period has elapsed, turn on the pump!
